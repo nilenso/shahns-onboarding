@@ -1,1 +1,2 @@
-Solutions to 4clojure problems.
+Project built with Leiningen.
+Contains solutions to 4clojure problems.
