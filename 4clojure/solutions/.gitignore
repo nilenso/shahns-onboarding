@@ -1,3 +1,6 @@
+.DS_Store
+.clj-kondo
+.calva
 /target
 /classes
 /checkouts
