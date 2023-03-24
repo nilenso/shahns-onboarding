@@ -159,6 +159,7 @@ true
 ;; (= (__ '(:a :b :c)) 3)
 ;; Special Restrictions : count
 
+;; not a good way to this
 (fn count-elements
   [test-seq]
   (def ctr 0)
@@ -178,17 +179,25 @@ true
 ;; (= (__ [[1 2][3 4][5 6]]) [[5 6][3 4][1 2]])
 ;; Special Restrictions : reverse
 
+;; not a good way to do this
 (fn rev-seq
   [test-seq]
   (def result '())
   (doseq [val test-seq] (def result (conj result val)))
   result)
 
-;; loop method seems to be a better way to do things?
+;; loop method seems to be a better way to do things
 #(loop [test-seq % rev-seq '()]
    (if (empty? test-seq)
      rev-seq
      (recur (rest test-seq) (conj rev-seq (first test-seq)))))
+
+;; recursion is possibly the cleanest way
+(defn reverse-seq
+  [test-seq]
+  (if (empty? test-seq)
+    nil
+    (conj (reverse-seq (butlast test-seq)) (last test-seq))))
 
 ;; Problem 24, Sum It All Up
 ;; Write a function which returns the sum of a sequence of numbers.
