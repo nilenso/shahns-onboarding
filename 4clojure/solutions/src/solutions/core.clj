@@ -184,6 +184,12 @@ true
   (doseq [val test-seq] (def result (conj result val)))
   result)
 
+;; loop method seems to be a better way to do things?
+#(loop [test-seq % rev-seq '()]
+   (if (empty? test-seq)
+     rev-seq
+     (recur (rest test-seq) (conj rev-seq (first test-seq)))))
+
 ;; Problem 24, Sum It All Up
 ;; Write a function which returns the sum of a sequence of numbers.
 ;; (= (__ [1 2 3]) 6)
