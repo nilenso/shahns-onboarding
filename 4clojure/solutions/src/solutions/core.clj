@@ -128,3 +128,73 @@ true
 ;; (= (__ '(5 4 3)) 3)
 ;; (= (__ ["b" "c" "d"]) "d")
 ;; Special Restrictions : last
+
+#(first (reverse %))
+
+;; Problem 20, Penultimate Element
+;; Write a function which returns the second to last element from a sequence.
+;; (= (__ (list 1 2 3 4 5)) 4)
+;; (= (__ ["a" "b" "c"]) "b")
+;; (= (__ [[1 2] [3 4]]) [1 2])
+
+#(second (reverse %))
+
+;; Problem 21, Nth Element
+;; Write a function which returns the Nth element from a sequence.
+;; (= (__ '(4 5 6 7) 2) 6)
+;; (= (__ [:a :b :c] 0) :a)
+;; (= (__ [1 2 3 4] 1) 2)
+;; (= (__ '([1 2] [3 4] [5 6]) 2) [5 6])
+;; Special Restrictions : nth
+
+;; (+ %2 1) takes care of zero indexation
+#(last (take (+ %2 1) %1))
+
+;; Problem 22, Count a Sequence
+;; Write a function which returns the total number of elements in a sequence.
+;; (= (__ '(1 2 3 3 1)) 5)
+;; (= (__ "Hello World") 11)
+;; (= (__ [[1 2] [3 4] [5 6]]) 3)
+;; (= (__ '(13)) 1)
+;; (= (__ '(:a :b :c)) 3)
+;; Special Restrictions : count
+
+(fn count-elements
+  [test-seq]
+  (def ctr 0)
+  (doseq [val test-seq] (def ctr (inc ctr)))
+  ctr)
+
+;; wanted to use loop, got help from the solutions
+#(loop [test-seq % ctr 0]
+   (if (seq test-seq)
+     (recur (rest test-seq) (inc ctr))
+     ctr))
+
+;; Problem 23, Reverse a Sequence
+;; Write a function which reverses a sequence.
+;; (= (__ [1 2 3 4 5]) [5 4 3 2 1])
+;; (= (__ (sorted-set 5 7 2 7)) '(7 5 2))
+;; (= (__ [[1 2][3 4][5 6]]) [[5 6][3 4][1 2]])
+;; Special Restrictions : reverse
+
+(fn rev-seq
+  [test-seq]
+  (def result '())
+  (doseq [val test-seq] (def result (conj result val)))
+  result)
+
+;; Problem 24, Sum It All Up
+;; Write a function which returns the sum of a sequence of numbers.
+;; (= (__ [1 2 3]) 6)
+;; (= (__ (list 0 -2 5 5)) 8)
+;; (= (__ #{4 2 1}) 7)
+;; (= (__ '(0 0 -1)) -1)
+;; (= (__ '(1 10 3)) 14)
+
+#(reduce + %)
+
+#(loop [test-seq % sum 0]
+   (if (= (count test-seq) 0)
+     sum
+     (recur (rest test-seq) (+ sum (first test-seq)))))
