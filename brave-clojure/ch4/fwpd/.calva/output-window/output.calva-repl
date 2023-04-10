@@ -1,0 +1,381 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+o o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"1.0.0"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.28.5"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- repl :headless
+; Using host:port 127.0.0.1:65491 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉fwpd.core꞉>  ; Use `alt+enter` to evaluate
+; Jack-in done.
+clj꞉fwpd.core꞉> 
+#'fwpd.co/filename
+clj꞉fwpd.co꞉> 
+#'fwpd.core/filename
+clj꞉fwpd.core꞉> 
+#'fwpd.core/filename
+clj꞉fwpd.core꞉> 
+; Evaluating file: core.clj
+#'fwpd.core/filename
+clj꞉fwpd.core꞉> 
+#'fwpd.core/filename
+clj꞉fwpd.core꞉> 
+(slurp filename)
+"dward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+(slurp filename)
+"dward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+(slurp filename)
+"Edward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+
+
+nil
+clj꞉fwpd.core꞉> 
+#'fwpd.core/filename
+clj꞉fwpd.core꞉> 
+#'fwpd.core/vamp-keys
+clj꞉fwpd.core꞉> 
+#'fwpd.core/str->int
+clj꞉fwpd.core꞉> 
+#'fwpd.core/conversions
+clj꞉fwpd.core꞉> 
+#'fwpd.core/convert
+clj꞉fwpd.core꞉> 
+; Syntax error compiling at (src/fwpd/core.clj:23:1).
+; Unable to resolve symbol: parse in this context
+clj꞉fwpd.core꞉> 
+#'fwpd.core/parse
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+; Execution error (ArityException) at fwpd.core/eval8014 (form-init14913464880617996681.clj:25).
+; Wrong number of args (1) passed to: clojure.string/split
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+"Edward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+#function[clojure.core/map/fn--5931]
+clj꞉fwpd.core꞉> 
+#'fwpd.core/mapify
+clj꞉fwpd.core꞉> 
+{:name "Edward Cullen", :glitter-index 10}
+clj꞉fwpd.core꞉> 
+#'fwpd.core/glitter-filter
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+{:name "Edward Cullen", :glitter-index 10}
+clj꞉fwpd.core꞉> 
+; Execution error (ClassCastException) at fwpd.core/eval8064 (form-init14913464880617996681.clj:40).
+; class clojure.lang.LazySeq cannot be cast to class clojure.lang.IFn (clojure.lang.LazySeq and clojure.lang.IFn are in unnamed module of loader 'app')
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Bella Swan", :glitter-index 0}
+ {:name "Charlie Swan", :glitter-index 0}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+; Syntax error compiling at (src/fwpd/core.clj:1:7969).
+; Unable to resolve symbol: Ç in this context
+clj꞉fwpd.core꞉> 
+; Syntax error compiling at (src/fwpd/core.clj:1:7969).
+; Unable to resolve symbol: Ç in this context
+clj꞉fwpd.core꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Connecting ...
+; Reading port file: file:///Users/shahn/Documents/shahn/repositories/shahns-onboarding/brave-clojure/ch4/fwpd/.nrepl-port ...
+; Using host:port localhost:65491 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉fwpd.core꞉> 
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Jacking in...
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"1.0.0"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.28.5"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- repl :headless
+; nREPL Connection was closed
+; Using host:port 127.0.0.1:49523 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉fwpd.core꞉> 
+; Jack-in done.
+clj꞉fwpd.core꞉> 
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting connect, error determining connect sequence.
+; Aborting connect, error determining connect sequence.
+; Evaluating file: core.clj
+#function[clojure.core/map/fn--5931]
+clj꞉fwpd.core꞉> 
+; Evaluating file: core.clj
+#function[clojure.core/map/fn--5931]
+clj꞉fwpd.core꞉> 
+; nREPL Connection was closed
+; Jacking in...
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"1.0.0"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.28.5"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- repl :headless
+; Using host:port 127.0.0.1:49543 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉fwpd.core꞉> 
+; Jack-in done.
+clj꞉fwpd.core꞉> 
+; Syntax error compiling at (src/fwpd/core.clj:40:1).
+; Unable to resolve symbol: mapify in this context
+clj꞉fwpd.core꞉> 
+#'fwpd.core/parse
+clj꞉fwpd.core꞉> 
+; Syntax error compiling at (src/fwpd/core.clj:28:44).
+; Unable to resolve symbol: convert in this context
+clj꞉fwpd.core꞉> 
+; Evaluating file: core.clj
+#function[clojure.core/map/fn--5931]
+clj꞉fwpd.core꞉> 
+#'fwpd.core/mapify
+clj꞉fwpd.core꞉> 
+#'fwpd.core/glitter-filter
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Bella Swan", :glitter-index 0}
+ {:name "Charlie Swan", :glitter-index 0}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+"Edward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+"Edward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+#function[clojure.core/map/fn--5931]
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp1
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp
+clj꞉fwpd.core꞉> 
+"Edward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp1
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Bella Swan", :glitter-index 0}
+ {:name "Charlie Swan", :glitter-index 0}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+([:name "Edward Cullen"] [:glitter-index "10"])
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+"Edward Cullen,10\nBella Swan,0\nCharlie Swan,0\nJacob Black,3\nCarlisle Cullen,6"
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp1
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp1
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+["Edward Cullen,10" "Bella Swan,0" "Charlie Swan,0" "Jacob Black,3" "Carlisle Cullen,6"]
+clj꞉fwpd.core꞉> 
+#'fwpd.core/temp1
+clj꞉fwpd.core꞉> 
+(["Edward Cullen" "10"] ["Bella Swan" "0"] ["Charlie Swan" "0"] ["Jacob Black" "3"] ["Carlisle Cullen" "6"])
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Bella Swan", :glitter-index 0}
+ {:name "Charlie Swan", :glitter-index 0}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+([:name "Edward Cullen"] [:glitter-index "10"])
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Bella Swan", :glitter-index 0}
+ {:name "Charlie Swan", :glitter-index 0}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Bella Swan", :glitter-index 0}
+ {:name "Charlie Swan", :glitter-index 0}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+; Execution error (ClassCastException) at fwpd.core/eval8006 (form-init11030251056839667972.clj:41).
+; class clojure.lang.LazySeq cannot be cast to class clojure.lang.IFn (clojure.lang.LazySeq and clojure.lang.IFn are in unnamed module of loader 'app')
+clj꞉fwpd.core꞉> 
+; Execution error (ClassCastException) at fwpd.core/eval8008 (form-init11030251056839667972.clj:41).
+; class clojure.lang.LazySeq cannot be cast to class clojure.lang.IFn (clojure.lang.LazySeq and clojure.lang.IFn are in unnamed module of loader 'app')
+clj꞉fwpd.core꞉> 
+; Execution error (ClassCastException) at fwpd.core/eval8010 (form-init11030251056839667972.clj:41).
+; class clojure.lang.LazySeq cannot be cast to class clojure.lang.IFn (clojure.lang.LazySeq and clojure.lang.IFn are in unnamed module of loader 'app')
+clj꞉fwpd.core꞉> 
+({:name "Edward Cullen", :glitter-index 10}
+ {:name "Jacob Black", :glitter-index 3}
+ {:name "Carlisle Cullen", :glitter-index 6})
+clj꞉fwpd.core꞉> 
+; Execution error (ClassCastException) at fwpd.core/eval8012 (form-init11030251056839667972.clj:41).
+; class clojure.lang.LazySeq cannot be cast to class clojure.lang.IFn (clojure.lang.LazySeq and clojure.lang.IFn are in unnamed module of loader 'app')
+clj꞉fwpd.core꞉> 
+; Error printing return value (IllegalArgumentException) at clojure.lang.RT/seqFrom (RT.java:557).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉fwpd.core꞉> 
+("Edward Cullen" "Jacob Black" "Carlisle Cullen")
+clj꞉fwpd.core꞉> 
+(("Edward Cullen" "Jacob Black" "Carlisle Cullen"))
+clj꞉fwpd.core꞉> 
+(("Edward Cullen") ("Jacob Black") ("Carlisle Cullen"))
+clj꞉fwpd.core꞉> 
+()
+clj꞉fwpd.core꞉> 
+("Carlisle Cullen" "Jacob Black" "Edward Cullen")
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+("Carlisle Cullen" "Jacob Black" "Charlie Swan" "Bella Swan" "Edward Cullen")
+clj꞉fwpd.core꞉> 
+#'fwpd.core/result
+clj꞉fwpd.core꞉> 
+("Carlisle Cullen" "Jacob Black" "Edward Cullen")
+clj꞉fwpd.core꞉> 
