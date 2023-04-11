@@ -1,12 +1,10 @@
 ;; Mars Rover Exercise
 
+;; todo: input validation, check invalid moves
+
 (ns mars-rover-new.core
   (:require [clojure.string :as string])
   (:gen-class))
-
-;; todo: input validation, check invalid moves
-
-;; input validation: check for number of args, catch errors during type conversion
 
 (declare add-plateau-size, add-rover-position, add-cmd-sequence)
 
@@ -62,10 +60,3 @@
   [& args]
   (println "Welcome to Mars!")
   (prn (user-input)))
-
-;; repl testing
-;; (add-plateau-size "10 100" info-map)
-;; (add-initial-position "0 0 N" info-map)
-;; (add-cmd-sequence "LLRRMM" info-map)
-
-;; (add-cmd-sequence "LLRRMM" (add-initial-position "0 0 N" (add-plateau-size "10 10" info-map)))
