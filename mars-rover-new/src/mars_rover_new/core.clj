@@ -32,7 +32,10 @@
   (let [plateau-size (get-input "Enter plateau size:")
         rover-position (get-input "Enter initial rover position:")
         cmd-sequence (get-input "Enter command sequence:")]
-    (add-cmd-sequence cmd-sequence (add-rover-position rover-position (add-plateau-size plateau-size info-map)))))
+    (->> info-map
+         (add-plateau-size plateau-size)
+         (add-rover-position rover-position)
+         (add-cmd-sequence cmd-sequence))))
 
 (defn add-plateau-size
   "Add plateau-size data to info-map"
