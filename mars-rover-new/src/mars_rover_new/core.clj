@@ -6,6 +6,8 @@
 
 ;; todo: input validation, check invalid moves
 
+;; input validation: check for number of args, catch errors during type conversion
+
 (declare add-plateau-size, add-rover-position, add-cmd-sequence)
 
 (def info-map {:plateau-size {:x nil
@@ -16,18 +18,20 @@
                :cmd-sequence nil})
 
 (defn get-input
-  "Read one line of input stream. Trim and convert to upper-case."
-  []
-  (let [input (string/trim (read-line))]
-    (string/upper-case input)))
+  "Prompt (if provided) and read one line of input stream. Trim and convert to upper-case."
+  ([] (get-input ""))
+  ([prompt]
+   (if (not-empty prompt)
+     (println prompt))
+   (let [input (string/trim (read-line))]
+     (string/upper-case input))))
 
 (defn user-input
   "Reads 3 lines of input from user and calls 3 functions which add this data to info-map"
-  []
-  (println "Please enter plateau-size, initial rover position and command sequence on 3 separate lines:")
-  (let [plateau-size (get-input)
-        rover-position (get-input)
-        cmd-sequence (get-input)]
+  [] 
+  (let [plateau-size (get-input "Enter plateau size:")
+        rover-position (get-input "Enter initial rover position:")
+        cmd-sequence (get-input "Enter command sequence:")]
     (add-cmd-sequence cmd-sequence (add-rover-position rover-position (add-plateau-size plateau-size info-map)))))
 
 (defn add-plateau-size
