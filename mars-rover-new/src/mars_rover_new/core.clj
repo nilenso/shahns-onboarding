@@ -19,7 +19,7 @@
   "Prompt (if provided) and read one line of input stream. Trim and convert to upper-case."
   ([] (get-input ""))
   ([prompt]
-   (if (not-empty prompt)
+   (when (not-empty prompt)
      (println prompt))
    (let [input (string/trim (read-line))]
      (string/upper-case input))))
