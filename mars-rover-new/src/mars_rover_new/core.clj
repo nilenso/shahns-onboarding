@@ -65,7 +65,7 @@
 (defn valid-cmd-sequence?
   "Returns true if command sequence contains valid commands"
   [cmd-sequence]
-  (every? #(contains? valid-cmds %) (map #(str (identity %)) cmd-sequence)))
+  (every? #(contains? valid-cmds (str %)) (seq cmd-sequence)))
 
 (defn add-plateau-size
   "Add plateau-size data to info-map"
