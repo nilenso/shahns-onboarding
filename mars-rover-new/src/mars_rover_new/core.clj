@@ -27,17 +27,6 @@
    (let [input (string/trim (read-line))]
      (string/upper-case input))))
 
-(defn user-input
-  "Reads 3 lines of input from user and calls 3 functions which add this data to info-map"
-  []
-  (let [plateau-size (get-input "Enter plateau size:")
-        rover-position (get-input "Enter initial rover position:")
-        cmd-sequence (get-input "Enter command sequence:")]
-    (->> info-map
-         (add-plateau-size plateau-size)
-         (add-rover-position rover-position)
-         (add-cmd-sequence cmd-sequence))))
-
 (defn split-string
   "Split string on white-space and remove empty elements"
   [s]
@@ -104,6 +93,17 @@
   "Add cmd-sequence data to info-map"
   [cmd-sequence, info-map]
   (assoc-in info-map [:cmd-sequence] cmd-sequence))
+
+(defn user-input
+  "Reads 3 lines of input from user and calls 3 functions which add this data to info-map"
+  []
+  (let [plateau-size (get-input "Enter plateau size:")
+        rover-position (get-input "Enter initial rover position:")
+        cmd-sequence (get-input "Enter command sequence:")]
+    (->> info-map
+         (add-plateau-size plateau-size)
+         (add-rover-position rover-position)
+         (add-cmd-sequence cmd-sequence))))
 
 (defn -main
   "Program entry point"
