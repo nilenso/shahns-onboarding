@@ -65,17 +65,13 @@
   (if (and (>= val lower-bound) (<= val upper-bound))
     true false))
 
-(defn verify-plateau-size
+(defn valid-plateau-size?
   "Check that input contains exactly two integers greater than 0"
   [plateau-size]
   (let [str-seq (split-string plateau-size)
-        [x y] str-seq
-        type-test (string-seq-only-digits? str-seq)
-        count-test (= 2 (count str-seq))]
-    (if (and type-test count-test
-             (> (str->int x) 0)
-             (> (str->int y) 0))
-      true false)))
+        count-test (= 2 (count str-seq))
+        [x y] (map str->int str-seq)]
+    (and count-test x y (> x 0) (> y 0))))
 
 (defn verify-rover-position
   "Verify that input contains exactly 2 integers and 1 direction character.
