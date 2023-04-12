@@ -11,12 +11,12 @@
 (def valid-directions #{"N" "E" "S" "W"})
 (def valid-cmds #{"L" "R" "M"})
 
-(def info-map {:plateau-size {:x nil
-                              :y nil}
-               :rover-position {:x nil
-                                :y nil
-                                :direction nil}
-               :cmd-sequence nil})
+(def default-mars-rover-data {:plateau-size {:x nil
+                                             :y nil}
+                              :rover-position {:x nil
+                                               :y nil
+                                               :direction nil}
+                              :cmd-sequence nil})
 
 (defn get-input
   "Prompt (if provided) and read one line of input stream. Trim and convert to upper-case."
@@ -55,13 +55,13 @@
 (defn valid-rover-position?
   "Verify that input contains exactly 2 integers and 1 direction character.
    Ensure rover position is within plateau size."
-  [rover-position, info-map]
+  [rover-position, mars-rover-data]
   (let [str-seq (split-string rover-position)
         count-test (= (count str-seq) 3)
         [x y] (map str->int (butlast str-seq))
         direction (get valid-directions (last str-seq))
-        max-x (get-in info-map [:plateau-size :x])
-        max-y (get-in info-map [:plateau-size :y])]
+        max-x (get-in mars-rover-data [:plateau-size :x])
+        max-y (get-in mars-rover-data [:plateau-size :y])]
     (and count-test x y direction (in-range? x 0 max-x) (in-range? y 0 max-y))))
 
 (defn valid-cmd-sequence?
@@ -73,29 +73,28 @@
   "Add plateau-size data to info-map"
   [plateau-size, info-map]
   (let [[x y] (map #(Integer/parseInt %) (string/split plateau-size #" "))]
-    (assoc info-map :plateau-size {:x x
+    (assoc mars-rover-data :plateau-size {:x x
                                    :y y})))
 
 (defn add-rover-position
-  "Add rover-position data to info-map"
-  [rover-position, info-map]
+  "Add rover-position data to mars-rover-data"
+  [rover-position, mars-rover-data]
   (let [[x y d] (string/split rover-position #" ")]
-    (assoc info-map :rover-position {:x (Integer/parseInt x)
-                                     :y (Integer/parseInt y)
-                                     :direction d})))
+    (assoc mars-rover-data :rover-position {:x (Integer/parseInt x)
+                                            :y (Integer/parseInt y)
+                                            :direction d})))
 
 (defn add-cmd-sequence
-  "Add cmd-sequence data to info-map"
-  [cmd-sequence, info-map]
-  (assoc info-map :cmd-sequence cmd-sequence))
+  "Add cmd-sequence data to mars-rover-data"
+  [cmd-sequence, mars-rover-data]
+  (assoc mars-rover-data :cmd-sequence cmd-sequence))
 
-(defn user-input
-  "Reads 3 lines of input from user and calls 3 functions which add this data to info-map"
+(defn process-user-input
   []
   (let [plateau-size (get-input "Enter plateau size:")
         rover-position (get-input "Enter initial rover position:")
         cmd-sequence (get-input "Enter command sequence:")]
-    (->> info-map
+    (->> default-mars-rover-data
          (add-plateau-size plateau-size)
          (add-rover-position rover-position)
          (add-cmd-sequence cmd-sequence))))
@@ -104,4 +103,4 @@
   "Program entry point"
   [& args]
   (println "Welcome to Mars!")
-  (prn (user-input)))
+  (prn (process-user-input)))
