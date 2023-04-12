@@ -73,20 +73,17 @@
         [x y] (map str->int str-seq)]
     (and count-test x y (> x 0) (> y 0))))
 
-(defn verify-rover-position
+(defn valid-rover-position?
   "Verify that input contains exactly 2 integers and 1 direction character.
    Ensure rover position is within plateau size."
   [rover-position, info-map]
   (let [str-seq (split-string rover-position)
-        [x y direction] str-seq
-        max-x (get-in info-map [:plateau-size :x])
-        max-y (get-in info-map [:plateau-size :y])
         count-test (= (count str-seq) 3)
-        type-test (and (string-only-digits? x) (string-only-digits? y) (contains? valid-directions direction))]
-    (if (and count-test type-test
-             (in-range? (str->int x) 0 max-x)
-             (in-range? (str->int y) 0 max-y))
-      true false)))
+        [x y] (map str->int (butlast str-seq))
+        direction (get valid-directions (last str-seq))
+        max-x (get-in info-map [:plateau-size :x])
+        max-y (get-in info-map [:plateau-size :y])]
+    (and count-test x y direction (in-range? x 0 max-x) (in-range? y 0 max-y))))
 
 (defn verify-cmd-sequence
   [cmd-sequence]
