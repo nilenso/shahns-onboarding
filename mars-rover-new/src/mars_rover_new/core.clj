@@ -54,9 +54,10 @@
   (every? #(= true %) (map string-only-digits? str-seq)))
 
 (defn str->int
-  "Convert string to integer"
+  "Convert string to integer. If invalid string, return nil"
   [s]
-  (Integer/parseInt s))
+  (try (Integer/parseInt s)
+       (catch Exception e nil)))
 
 (defn in-range?
   "Check if val is within bounds (inclusive)"
