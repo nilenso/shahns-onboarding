@@ -6,8 +6,6 @@
   (:require [clojure.string :as string])
   (:gen-class))
 
-(declare add-plateau-size, add-rover-position, add-cmd-sequence)
-
 (def valid-directions #{"N" "E" "S" "W"})
 (def valid-cmds #{"L" "R" "M"})
 
