@@ -85,10 +85,10 @@
         max-y (get-in info-map [:plateau-size :y])]
     (and count-test x y direction (in-range? x 0 max-x) (in-range? y 0 max-y))))
 
-(defn verify-cmd-sequence
+(defn valid-cmd-sequence?
+  "Returns true if command sequence contains valid commands"
   [cmd-sequence]
-  (let [valid-cmd-test (every? #(contains? valid-cmds %) (map #(str (identity %)) cmd-sequence))]
-    (if valid-cmd-test true false)))
+  (every? #(contains? valid-cmds %) (map #(str (identity %)) cmd-sequence)))
 
 (defn add-plateau-size
   "Add plateau-size data to info-map"
