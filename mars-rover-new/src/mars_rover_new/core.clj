@@ -48,11 +48,6 @@
   [s]
   (every? #(Character/isDigit %) s))
 
-(defn string-seq-only-digits?
-  "Returns true if all strings in sequence contain only integers"
-  [str-seq]
-  (every? #(= true %) (map string-only-digits? str-seq)))
-
 (defn str->int
   "Convert string to integer. If invalid string, return nil"
   [s]
