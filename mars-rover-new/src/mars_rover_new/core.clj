@@ -32,11 +32,6 @@
   [s]
   (filter #(not-empty %) (string/split s #" ")))
 
-(defn string-only-digits?
-  "Returns true if string contains only integers"
-  [s]
-  (every? #(Character/isDigit %) s))
-
 (defn str->int
   "Convert string to integer. If invalid string, return nil"
   [s]
