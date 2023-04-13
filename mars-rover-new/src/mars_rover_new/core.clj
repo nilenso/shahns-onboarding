@@ -68,34 +68,48 @@
   (every? #(contains? valid-cmds (str %)) (seq cmd-sequence)))
 
 (defn add-plateau-size
-  "Add plateau-size data to info-map"
-  [plateau-size, info-map]
+  "Verify and add plateau-size data to mars-rover-data"
+  [plateau-size, mars-rover-data]
+  {:pre [(valid-plateau-size? plateau-size)]}
   (let [[x y] (map #(Integer/parseInt %) (string/split plateau-size #" "))]
     (assoc mars-rover-data :plateau-size {:x x
-                                   :y y})))
+                                          :y y})))
 
 (defn add-rover-position
-  "Add rover-position data to mars-rover-data"
+  "Verify and add rover-position data to mars-rover-data"
   [rover-position, mars-rover-data]
+  {:pre [(valid-rover-position? rover-position mars-rover-data)]}
   (let [[x y d] (string/split rover-position #" ")]
     (assoc mars-rover-data :rover-position {:x (Integer/parseInt x)
                                             :y (Integer/parseInt y)
                                             :direction d})))
 
 (defn add-cmd-sequence
-  "Add cmd-sequence data to mars-rover-data"
+  "Verify and add cmd-sequence data to mars-rover-data"
   [cmd-sequence, mars-rover-data]
+  {:pre [(valid-cmd-sequence? cmd-sequence)]}
   (assoc mars-rover-data :cmd-sequence cmd-sequence))
 
 (defn process-user-input
+  "Reads 3 lines of input from user and calls functions to input data to mars-rover-data"
   []
   (let [plateau-size (get-input "Enter plateau size:")
         rover-position (get-input "Enter initial rover position:")
         cmd-sequence (get-input "Enter command sequence:")]
-    (->> default-mars-rover-data
-         (add-plateau-size plateau-size)
-         (add-rover-position rover-position)
-         (add-cmd-sequence cmd-sequence))))
+    (try
+      (->> default-mars-rover-data
+           (add-plateau-size plateau-size)
+           (add-rover-position rover-position)
+           (add-cmd-sequence cmd-sequence))
+      (catch AssertionError e
+        (let [msg (.getMessage e)]
+          (when (.contains msg "plateau-size")
+            (println "Plateau size error, please try again."))
+          (when (.contains msg "rover-position")
+            (println "Rover initial position error, please try again."))
+          (when (.contains msg "cmd-sequence")
+            (println "Command sequence error, please try again.")))
+        (process-user-input)))))
 
 (defn -main
   "Program entry point"
