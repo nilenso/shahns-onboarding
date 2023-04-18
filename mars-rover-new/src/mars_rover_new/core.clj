@@ -1,19 +1,45 @@
 ;; Mars Rover Exercise
 
-;; todo: input validation, check invalid moves
-
 (ns mars-rover-new.core
-  (:require [clojure.string :as string])
+  (:require [clojure.string :as string]
+            [clojure.pprint :as pp])
   (:gen-class))
+
+;; (declare mars-rover-new.core/rotate-left, mars-rover-new.core/rotate-right, mars-rover-new.core/move)
+(declare rotate-left, rotate-right, move)
 
 (def valid-directions #{"N" "E" "S" "W"})
 (def valid-cmds #{"L" "R" "M"})
 
+;; mapping of L, R and M to their respective core functions
+(def fn-map {"L" mars-rover-new.core/rotate-left
+             "R" mars-rover-new.core/rotate-right
+             "M" mars-rover-new.core/move})
+
+;; transforms defines the result of left, right and move transforms
+;; key -> current location; value -> location after applying transform
+(def transforms {:left {"N" "W"
+                        "E" "N"
+                        "S" "E"
+                        "W" "S"}
+                 :right {"N" "E"
+                         "E" "S"
+                         "S" "W"
+                         "W" "N"}
+                 :move {"N" {:coord :y
+                             :action inc}
+                        "E" {:coord :x
+                             :action inc}
+                        "S" {:coord :y
+                             :action dec}
+                        "W" {:coord :x
+                             :action dec}}})
+
 (def default-mars-rover-data {:plateau-size {:x nil
                                              :y nil}
-                              :rover-position {:x nil
-                                               :y nil
-                                               :direction nil}
+                              :rover {:x nil
+                                      :y nil
+                                      :direction nil}
                               :cmd-sequence nil})
 
 (defn get-input
@@ -80,15 +106,33 @@
   [rover-position, mars-rover-data]
   {:pre [(valid-rover-position? rover-position mars-rover-data)]}
   (let [[x y d] (string/split rover-position #" ")]
-    (assoc mars-rover-data :rover-position {:x (Integer/parseInt x)
-                                            :y (Integer/parseInt y)
-                                            :direction d})))
+    (assoc mars-rover-data :rover {:x (Integer/parseInt x)
+                                   :y (Integer/parseInt y)
+                                   :direction d})))
 
 (defn add-cmd-sequence
   "Verify and add cmd-sequence data to mars-rover-data"
   [cmd-sequence, mars-rover-data]
   {:pre [(valid-cmd-sequence? cmd-sequence)]}
   (assoc mars-rover-data :cmd-sequence cmd-sequence))
+
+(defn rotate-left
+  "Rotate rover counter-clockwise 90 degrees"
+  [mars-rover-data]
+  (assoc-in mars-rover-data [:rover :direction] (get-in transforms [:left (get-in mars-rover-data [:rover :direction])])))
+
+(defn rotate-right
+  "Rotate rover clockwise 90 degrees"
+  [mars-rover-data]
+  (assoc-in mars-rover-data [:rover :direction] (get-in transforms [:right (get-in mars-rover-data [:rover :direction])])))
+
+(defn move
+  "Move rover forward one unit"
+  [mars-rover-data]
+  (let [direction (get-in mars-rover-data [:rover :direction])
+        key (get-in transforms [:move direction :coord])
+        op (get-in transforms [:move direction :action])]
+    (assoc-in mars-rover-data [:rover key] (op (get-in mars-rover-data [:rover key])))))
 
 (defn process-user-input
   "Reads 3 lines of input from user and calls functions to input data to mars-rover-data"
@@ -111,8 +155,48 @@
             (println "Command sequence error, please try again.")))
         (process-user-input)))))
 
+(defn process-cmds
+  "Reduces over a list of functions and builds up the rover's final position"
+  ;; Uses fn-map to get the core functions corresponding to L, R and M commands
+  [mars-rover-data]
+  (reduce (fn [new-mars-rover-data cmd]
+            (prn cmd)
+            (prn new-mars-rover-data)
+            (prn fn-map)
+            ((resolve (get fn-map cmd)) new-mars-rover-data))
+          mars-rover-data
+          (map str (get mars-rover-data :cmd-sequence))))
+
+;; (def mars-rover-data {:plateau-size {:x 10 :y 10}
+;;                       :rover {:x 0
+;;                               :y 0
+;;                               :direction "N"}
+;;                       :cmd-sequence "MMRMM"})
+
+;; (process-cmds mars-rover-data)
+
+;; mars-rover-data
+;; transforms
+;; (get fn-map "M")
+
+
+(defn display-result
+  [mars-rover-data]
+  ;; keys destructuring
+  (let [;;[x y d] (get mars-rover-data :rover)
+        x (get-in mars-rover-data [:rover :x])
+        y (get-in mars-rover-data [:rover :y])
+        d (get-in mars-rover-data [:rover :direction])
+        max-x (get-in mars-rover-data [:plateau-size :x])
+        max-y (get-in mars-rover-data [:plateau-size :y])]
+    (if (and (in-range? x 0 max-x) (in-range? y 0 max-y))
+      (println "Final rover position:")
+      (println "Final rover position outside plateau area, you destroyed the rover:"))
+    (println x y d)))
+
 (defn -main
   "Program entry point"
   [& args]
-  (println "Welcome to Mars!")
-  (prn (process-user-input)))
+  ;;(println "Welcome to Mars!")
+  ;;(display-result (process-cmds (process-user-input)))
+  (pp/pprint fn-map))
