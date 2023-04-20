@@ -48,7 +48,6 @@
   [val]
   (if val true false))
 
-
 (defn split-string
   "Split string on white-space and remove empty elements"
   [s]
