@@ -76,8 +76,7 @@
         count-test (= (count str-seq) 3)
         [x y] (map str->int (butlast str-seq))
         direction (get valid-directions (last str-seq))
-        max-x (get-in mars-rover-data [:plateau-size :x])
-        max-y (get-in mars-rover-data [:plateau-size :y])]
+        {max-x :x max-y :y} (get mars-rover-data :plateau-size)]
     (and count-test x y direction (in-range? x 0 max-x) (in-range? y 0 max-y))))
 
 (defn valid-cmd-sequence?
