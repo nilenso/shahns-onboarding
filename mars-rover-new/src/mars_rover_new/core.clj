@@ -43,6 +43,12 @@
    (let [input (string/trim (read-line))]
      (string/upper-case input))))
 
+(defn truthy
+  "Returns false if val is nil or false otherwise true"
+  [val]
+  (if val true false))
+
+
 (defn split-string
   "Split string on white-space and remove empty elements"
   [s]
@@ -66,7 +72,7 @@
   (let [str-seq (split-string plateau-size)
         count-test (= 2 (count str-seq))
         [x y] (map str->int str-seq)]
-    (and count-test x y (> x 0) (> y 0))))
+    (truthy (and count-test x y (> x 0) (> y 0)))))
 
 (defn valid-rover-position?
   "Verify that input contains exactly 2 integers and 1 direction character.
@@ -77,7 +83,7 @@
         [x y] (map str->int (butlast str-seq))
         direction (get valid-directions (last str-seq))
         {max-x :x max-y :y} (get mars-rover-data :plateau-size)]
-    (and count-test x y direction (in-range? x 0 max-x) (in-range? y 0 max-y))))
+    (truthy (and count-test x y direction (in-range? x 0 max-x) (in-range? y 0 max-y)))))
 
 (defn valid-cmd-sequence?
   "Returns true if command sequence contains valid commands"
