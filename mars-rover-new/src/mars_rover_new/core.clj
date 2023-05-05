@@ -44,7 +44,7 @@
      (string/upper-case input))))
 
 (defn truthy
-  "Returns false if val is nil or false otherwise true"
+  "Returns false if val is nil or false, otherwise true"
   [val]
   (if val true false))
 
@@ -72,6 +72,8 @@
         count-test (= 2 (count str-seq))
         [x y] (map str->int str-seq)]
     (truthy (and count-test x y (> x 0) (> y 0)))))
+    ;; Without truthy we could get a return value of either false or nil for invalid inputs
+    ;; Using truthy since it is easier to test and also clearer to have a single 'failure' return value
 
 (defn valid-rover-position?
   "Verify that input contains exactly 2 integers and 1 direction character.
