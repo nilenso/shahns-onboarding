@@ -158,12 +158,19 @@
           mars-rover-data
           (map str (get mars-rover-data :cmd-sequence))))
 
+(defn validate-rover-position
+  "Check that rover position is valid: not negative and within plateau.
+   Different from valid-rover-position? which checks the input string."
+  [mars-rover-data]
+  (let [{x :x y :y} (get mars-rover-data :rover-position)
+        {max-x :x max-y :y} (get mars-rover-data :plateau-size)]
+    (and (in-range? x 0 max-x) (in-range? y 0 max-y))))
+
 (defn display-result
   "Display final rover position and check if position is within plateau area"
   [mars-rover-data]
-  (let [{x :x y :y d :direction} (get mars-rover-data :rover-position)
-        {max-x :x max-y :y} (get mars-rover-data :plateau-size)]
-    (if (and (in-range? x 0 max-x) (in-range? y 0 max-y))
+  (let [{x :x y :y d :direction} (get mars-rover-data :rover-position)]
+    (if (validate-rover-position mars-rover-data)
       (println "Final rover position:")
       (println "Final rover position outside plateau area, you destroyed the rover:"))
     (println x y d)))
