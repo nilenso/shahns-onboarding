@@ -18,13 +18,13 @@
                          "E" "S"
                          "S" "W"
                          "W" "N"}
-                 :move {"N" {:coord :y
+                 :move {"N" {:ord :y
                              :action inc}
-                        "E" {:coord :x
+                        "E" {:ord :x
                              :action inc}
-                        "S" {:coord :y
+                        "S" {:ord :y
                              :action dec}
-                        "W" {:coord :x
+                        "W" {:ord :x
                              :action dec}}})
 
 (def default-mars-rover-data {:plateau-size {:x nil
@@ -121,7 +121,7 @@
   "Move rover forward one unit"
   [mars-rover-data]
   (let [direction (get-in mars-rover-data [:rover-position :direction])
-        {key :coord op :action} (get-in transforms [:move direction])]
+        {key :ord op :action} (get-in transforms [:move direction])]
     (assoc-in mars-rover-data [:rover-position key] (op (get-in mars-rover-data [:rover-position key])))))
 
 ;; mapping of L, R and M to their respective core functions
