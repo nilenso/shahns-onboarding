@@ -171,4 +171,7 @@
 (defn -main
   "Program entry point"
   [& args]
-  (display-result (process-cmds (process-user-input))))
+  (println "Welcome to Mars!")
+  (->> (process-user-input)
+       (process-cmds)
+       (display-result)))
