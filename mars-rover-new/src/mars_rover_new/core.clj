@@ -125,9 +125,9 @@
     (assoc-in mars-rover-data [:rover-position key] (op (get-in mars-rover-data [:rover-position key])))))
 
 ;; mapping of L, R and M to their respective core functions
-(def fn-map {"L" mars-rover-new.core/rotate-left
-             "R" mars-rover-new.core/rotate-right
-             "M" mars-rover-new.core/move})
+(def cmd->fn {"L" mars-rover-new.core/rotate-left
+              "R" mars-rover-new.core/rotate-right
+              "M" mars-rover-new.core/move})
 
 (defn process-user-input
   "Reads 3 lines of input from user and calls functions to input data to mars-rover-data"
@@ -150,11 +150,11 @@
             (println "Command sequence error, please try again.")))
         (process-user-input)))))
 
-;; process-cmds uses fn-map to get the core functions corresponding to L, R and M commands
+;; process-cmds uses cmd->fn to get the core functions corresponding to L, R and M commands
 (defn process-cmds
   "Reduces over a list of functions and builds up the rover's final position"
   [mars-rover-data]
-  (reduce (fn [new-mars-rover-data cmd] ((get fn-map cmd) new-mars-rover-data))
+  (reduce (fn [new-mars-rover-data cmd] ((get cmd->fn cmd) new-mars-rover-data))
           mars-rover-data
           (map str (get mars-rover-data :cmd-sequence))))
 
