@@ -28,31 +28,18 @@
   (:require [clojure.string :as string])
   (:gen-class))
 
-;; For simplicity, we define one test input as a list of strings
-(def input-list (list "vJrwpWtwJgWrhcsFMMfFFhFp"
-                      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
-                      "PmmdzqPrVvPwwTWBwg"
-                      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
-                      "ttgJtRGJQctTZtZT"
-                      "CrZsJsPPZsGzwwsLwLmpwMDw"))
-
 (defn input-file->string-seq
   "Read file and extract strings separated by \n into a vector of strings"
   [f]
-  (string/split (slurp f) #"\n"))
-
-;; (input-file->string-list "input.txt")
-
-(defn charlist->string
-  "Convert a list of characters to a string"
-  [charlist]
-  (apply str charlist))
+  (-> (slurp f)
+      (string/split #"\n")))
 
 (defn compartmentalize
-  "Divide rucksack contents (one string) into 2 compartments (two strings)"
+  "Divide rucksack contents (one string) into 2 compartments (two lists of chars)"
   [rucksack-contents]
-  (map charlist->string
-       (partition (/ (count rucksack-contents) 2) rucksack-contents)))
+  (let [half-length (/ (count rucksack-contents) 2)]
+    (->> rucksack-contents
+         (partition half-length))))
 
 (defn find-common-item
   "Find the common item between 2 compartments"
@@ -66,39 +53,37 @@
   [item]
   (let [priority-a 1
         priority-A 27
+        item-ascii (int item)
         offset (if (Character/isUpperCase item)
                  (- (int \A) priority-A)
                  (- (int \a) priority-a))]
-    (- (int item) offset)))
+    (- item-ascii offset)))
 
-(defn gen-common-keys-map
-  "Find pairs of common keys between two hashmaps.
-   Return hashmap with key: common key; value: min value of key across both maps.
-   Used if we decide to lift input restrictions, and have multiple common key pairs."
-  [m1 m2]
-  (reduce
-   (fn [m [item freq]]
-     (if (contains? m2 item)
-       (assoc m item (min (get m1 item) (get m2 item)))
-       m))
-   {} m1))
-
-(gen-common-keys-map {\P 2 \a 1 \c 3} {\B 4 \P 1 \c 2})
-
-(defn sum-priorities-of-common-item-pairs
-  "Return the sum of priorities for each pair of common items between the 2 compartments of a rucksack
-   Used if we decide to lift input restrictions, and have multiple common key pairs."
+(defn gen-common-pair-frequencies
+  "Return hashmap with key: common item; value: number of item pairs across both compartments.
+   Priority will be counted for each pair of common items.
+   ONLY USED if we decide to lift input restrictions, and have more than one common item between compartments."
   [compartment-1, compartment-2]
   (let [m1 (frequencies compartment-1)
-        m2 (frequencies compartment-2)
-        common-key-map (gen-common-keys-map m1 m2)]
-    (->> common-key-map
-         (map (fn [[item freq]]
-                (* freq (calculate-priority item))))
-         (apply +))))
+        m2 (frequencies compartment-2)]
+    (reduce
+     (fn [m [item frequency]]
+       (if (contains? m2 item)
+         (->> item
+              (get m2)
+              (min frequency)
+              (assoc m item))
+         m))
+     {} m1)))
 
-;; (common-item-priority "PmmdzqPrVvPwwTWBwg")
-(apply sum-priorities-of-common-item-pairs (compartmentalize "PPmmdzqPrVvPPPwwwTWBwg"))
+(defn sum-of-priority-of-common-pairs
+  "Return the sum of priorities for each pair of common items between the 2 compartments of a rucksack.   
+   ONLY USED if we decide to lift input restrictions, and have multiple common key pairs."
+  [common-pair-frequencies]
+  (->> common-pair-frequencies
+       (map (fn [[item frequency]]
+              (* frequency (calculate-priority item))))
+       (apply +)))
 
 (defn common-item-priority
   "Return the priority of the common item between the 2 compartments of a rucksack"
@@ -111,8 +96,8 @@
 ;; look into pros/cons of apply vs reduce (memory, readability)
 (defn sum-rucksack-priorities
   "Return the total sum of common-item-priority for each rucksack in the supplied input list"
-  [input]
-  (->> input
+  [rucksacks]
+  (->> rucksacks
        (map common-item-priority)
        (apply +)))
 
