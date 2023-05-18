@@ -47,6 +47,14 @@
   (let [c1 (set compartment-1)
         c2 (set compartment-2)]
     (some #(get c2 %) c1)))
+(defn find-badge
+  "Find the common item (badge) between 3 rucksacks.
+   Used in Part 2 of problem."
+  [rucksack-1, rucksack-2, rucksack-3]
+  (let [r1 (set rucksack-1)
+        r2 (set rucksack-2)
+        r3 (set rucksack-3)]
+    (first (set/intersection r1 r2 r3))))
 
 (defn calculate-priority
   "Return the priority of an item (character)"
@@ -101,13 +109,24 @@
        (map common-item-priority)
        (apply +)))
 
-(sum-rucksack-priorities input-list)
-(sum-rucksack-priorities (input-file->string-seq "input.txt"))
+(defn sum-badge-priorities
+  "Sum the priorities of badges for each group of 3 rucksacks.
+   Used in Part 2 of problem."
+  [rucksacks]
+  (->> rucksacks
+       (partition 3)
+       (map #(apply find-badge %))
+       (map calculate-priority)
+       (apply +)))
 
 (defn -main
   "i am main"
   []
-  (println "Sum of common element priorities across all rucksacks: \n"
-           (sum-rucksack-priorities input-list)))
-
-
+  (println "Part 1 answer: \n"
+           (->> "input.txt"
+                input-file->string-seq
+                sum-rucksack-priorities))
+  (println "Part 2 answer: \n"
+           (->> "input.txt"
+                input-file->string-seq
+                sum-badge-priorities)))
