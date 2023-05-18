@@ -25,7 +25,8 @@
 ;; Repeat the above for each group of 3 rucksacks, and sum the priorities of common items.
 
 (ns rucksack-problem.core
-  (:require [clojure.string :as string])
+  (:require [clojure.string :as string]
+            [clojure.set :as set])
   (:gen-class))
 
 (defn input-file->string-seq
@@ -47,6 +48,8 @@
   (let [c1 (set compartment-1)
         c2 (set compartment-2)]
     (some #(get c2 %) c1)))
+;; could also use set intersection here
+
 (defn find-badge
   "Find the common item (badge) between 3 rucksacks.
    Used in Part 2 of problem."
