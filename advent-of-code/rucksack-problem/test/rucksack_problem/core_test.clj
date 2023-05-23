@@ -38,9 +38,20 @@
       1 (calculate-priority \a)
       26 (calculate-priority \z)
       27 (calculate-priority \A)
-      52 (priority \Z))))
+(deftest find-badge-test
+  (testing "Return the common item (badge) between a group of 3 rucksacks"
+    (let [rucksack-1 "vJrwpWtwJgWrhcsFMMfFFhFp"
+          rucksack-2 "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
+          rucksack-3 "PmmdzqPrVvPwwTWBwg"]
+      (is (= \r
+             (find-badge rucksack-1 rucksack-2 rucksack-3))))))
 
-;; automate priority-test case generation?
-;; (for [i (range 97 123)
-;;       :let [j (- i 96)]]
-;;   (prn (char i) j)) 
+(deftest sum-badge-priorities-test
+  (testing "Return sum of priorities of badges for each group of 3 rucksacks"
+    (let [test-input (list "vJrwpWtwJgWrhcsFMMfFFhFp"
+                           "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"
+                           "PmmdzqPrVvPwwTWBwg"
+                           "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"
+                           "ttgJtRGJQctTZtZT"
+                           "CrZsJsPPZsGzwwsLwLmpwMDw")]
+      (is (= 70 (sum-badge-priorities test-input))))))
