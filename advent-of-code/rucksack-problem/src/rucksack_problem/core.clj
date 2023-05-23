@@ -1,14 +1,14 @@
-;; Advent of Code Day 3
+;; Advent of Code Day 03
 
 ;; Part 1
-;;      First version: Process a single rucksack
+;;      Process a single rucksack
 ;;   1. Divide rucksack string into 2 halves
 ;;   2. Check for the common item (only one exists) in both halves
 ;;   3. Find the priority of the common item using the below relationships:
 ;;      Priority of a - z: 1 - 26
 ;;      Priority of A - Z: 27 - 52)
 ;;
-;;      And then expand to multiple rucksacks.
+;;      And then expand to multiple rucksacks to solve Part 1
 
 ;; Lifting some input restrictions as another exercise
 ;; Lift restriction of a single common item. Code generic solution where priorities are counted
@@ -36,7 +36,8 @@
       (string/split #"\n")))
 
 (defn compartmentalize
-  "Divide rucksack contents (one string) into 2 compartments (two lists of chars)"
+  "Divide rucksack contents into 2 compartments
+   1 string -> 2 lists of chars"
   [rucksack-contents]
   (let [half-length (/ (count rucksack-contents) 2)]
     (->> rucksack-contents
@@ -48,10 +49,10 @@
   (let [c1 (set compartment-1)
         c2 (set compartment-2)]
     (some #(get c2 %) c1)))
-;; could also use set intersection here
+;; can also use set intersection here
 
 (defn find-badge
-  "Find the common item (badge) between 3 rucksacks.
+  "Find the common item (badge) between a group of 3 rucksacks.
    Used in Part 2 of problem."
   [rucksack-1, rucksack-2, rucksack-3]
   (let [r1 (set rucksack-1)
@@ -71,9 +72,9 @@
     (- item-ascii offset)))
 
 (defn gen-common-pair-frequencies
-  "Return hashmap with key: common item; value: number of item pairs across both compartments.
-   Priority will be counted for each pair of common items.
-   ONLY USED if we decide to lift input restrictions, and have more than one common item between compartments."
+  "ONLY USED if we decide to lift input restrictions, and have more than one common item between compartments.
+   Return hashmap with key: common item; value: number of item pairs across both compartments.
+   Priority will be counted for each pair of common items."
   [compartment-1, compartment-2]
   (let [m1 (frequencies compartment-1)
         m2 (frequencies compartment-2)]
@@ -88,8 +89,8 @@
      {} m1)))
 
 (defn sum-of-priority-of-common-pairs
-  "Return the sum of priorities for each pair of common items between the 2 compartments of a rucksack.   
-   ONLY USED if we decide to lift input restrictions, and have multiple common key pairs."
+  "ONLY USED if we decide to lift input restrictions, and have multiple common key pairs.
+   Return the sum of priorities for each pair of common items between the 2 compartments of a rucksack."
   [common-pair-frequencies]
   (->> common-pair-frequencies
        (map (fn [[item frequency]]
